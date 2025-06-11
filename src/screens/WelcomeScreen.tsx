@@ -1,6 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import PrimaryButton from './../components/PrimaryButton'
 
 export default function WelcomeScreen() {
+
+    const handlePress = () => {
+        Alert.alert('You pressed the button')
+    }
 
     return (
         <View style={styles.container}>
@@ -10,6 +15,8 @@ export default function WelcomeScreen() {
             <Text style={styles.subtitle}>
                 Let's build together
             </Text>
+            <PrimaryButton title='Lets go' onPress={handlePress} />
+            <PrimaryButton title='click me' onPress={handlePress} />
         </View>
     )
 }
