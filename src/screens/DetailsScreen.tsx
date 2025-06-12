@@ -23,13 +23,13 @@ export default function DetailsScreen() {
       .finally(() => setLoading(false))
   }, [])
 
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#4f46e5" />
-      </View>
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <View style={styles.center}>
+  //       <ActivityIndicator size="large" color="#4f46e5" />
+  //     </View>
+  //   )
+  // }
 
   if (error) {
     return (
@@ -45,21 +45,30 @@ export default function DetailsScreen() {
       <Text style={styles.subtitle}>Here’s where cool stuff will happen 🚀</Text>
       <PrimaryButton title="Go to Welcome screen" onPress={() => navigation.navigate('Welcome')} />
 
-      <FlatList
-        data={users}
-        keyExtractor={(item) => String(item.id)}
-        contentContainerStyle={styles.list}
-        renderItem={({ item, index }) => (
-          <Animated.View
-            entering={FadeInUp.delay(index * 100).duration(250)}
-            style={styles.card}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.email}>{item.email}</Text>
-          </Animated.View>
-        )}
-      >
+      {loading && (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" color="#4f46e5" />
+        </View>
+      )}
 
-      </FlatList>
+      {!loading && (
+        <FlatList
+          data={users}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={styles.list}
+          renderItem={({ item, index }) => (
+            <Animated.View
+              entering={FadeInUp.delay(index * 100).duration(250)}
+              style={styles.card}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.email}>{item.email}</Text>
+            </Animated.View>
+          )}
+        >
+
+        </FlatList>
+      )}
+
     </Animated.View>
   )
 }
